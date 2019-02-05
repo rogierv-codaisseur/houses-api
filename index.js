@@ -5,10 +5,12 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize(
-  'postgres://postgres:secret@localhost:5432/postgres',
-  { define: { timestamps: false } }
-);
+const connectionString =
+  process.env.DATABASE_URL ||
+  'postgres://postgres:secret@localhost:5432/postgres';
+const sequelize = new Sequelize(connectionString, {
+  define: { timestamps: false }
+});
 const port = 4000;
 app.listen(port, () => `Listening on port ${port}`);
 
