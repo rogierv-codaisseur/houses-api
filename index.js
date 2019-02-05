@@ -29,6 +29,11 @@ const House = sequelize.define(
 
 House.sync();
 
+app.get('/', (req, res) => {
+  console.log('test');
+  res.send('hi');
+});
+
 app.get('/houses', (req, res, next) => {
   House.findAll()
     .then(houses => {
